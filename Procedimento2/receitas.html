@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Receitas</title>
+   
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        
+        .card {
+            margin: 10px;
+            width: 250px;
+        }
+        body {
+            background-color: white;
+        }
+    </style>
+</head>
+<body onload="preencheCatalogo()">
+    <div class="container-fluid">
+        <h1>Catálogo de Receitas</h1>
+        <div id="pnlCatalogo" class="d-flex flex-wrap">
+            
+        </div>
+    </div>
+
+   
+    <script>
+        
+        const receitas = [
+            {
+                titulo: "Bolo de Chocolate",
+                imagem: "bolo.png",
+                preparo: "Modo de Preparo:<br> Em um liquidificador, adicione os ovos, o chocolate em pó, a manteiga, a farinha de trigo, o açúcar e o leite.<br> Bata por 5 minutos.<br> Adicione o fermento e misture delicadamente com uma espátula.<br> Em uma forma untada, despeje a massa e asse em forno médio (180 ºC) preaquecido por cerca de 40 minutos.<br> Utilize uma forma alta para essa receita, pois ela cresce bastante.<br> Calda:<br> Em uma panela, aqueça a manteiga e misture o chocolate em pó até que esteja homogêneo.<br> Acrescente o creme de leite e misture bem até obter uma consistência cremosa.<br> Desligue o fogo e acrescente o açúcar.",
+                ingredientes: [
+                    "4 ovos",
+                    "4 colheres (sopa) de chocolate em pó",
+                    "2 colheres (sopa) de manteiga",
+                    "3 xícaras (chá) de farinha de trigo",
+                    "2 xícaras (chá) de açúcar",
+                    "2 colheres (sopa) de fermento em pó químico",
+                    "1 xícara (chá) de leite"
+                ]
+            },
+            {
+                titulo: "Pizza Caseira",
+                imagem: "pizza.png",
+                preparo: "Modo de Preparo:<br> Coloque a farinha de trigo em uma tigela e acrescente o óleo, a água morna, os dois tabletes de fermento de pão dissolvidos no açúcar e no sal.<br> Mexa com uma colher de pau e depois sove bem a massa com as mãos até que ela desgrude das mãos.<br> Deixe descansar por aproximadamente 30 minutos.<br> Unte a forma com manteiga e depois espalhe a massa sobre ela.<br> Deixe dourar em forno pré-aquecido de 25 a 35 minutos.",
+                ingredientes: [
+                    "2 copos duplos de farinha de trigo",
+                    "2 colheres de sopa de óleo",
+                    "1 colher de café de sal",
+                    "1 colher de café de açúcar",
+                    "Água morna",
+                    "2 tabletes de fermento de pão"
+                ]
+            },
+            {
+                titulo: "Sopa de Legumes",
+                imagem: "sopa.png",
+                preparo: "Modo de Preparo: Coloque um fio de óleo na panela de pressão.<br> Acrescente a cebola e deixe dourar.<br> Acrescente a carne bovina e deixe dourar.<br> Acrescente o tomate picado.<br> Coloque o caldo de carne e o envelope de tempero tipo sazon.<br> Junte as batatas, as cenouras, as mandioquinhas e as vagens e deixe refogar por 3 minutos (sempre mexendo para não grudar no fundo da panela).<br> Adicione a salsinha e a cebolinha, a pimenta, o sal e, por último, a água.<br> A água deve ser adicionada até ultrapassar um pouco mais da metade da panela de pressão.<br> Tampe a panela de pressão e deixe cozinhar por 40 minutos.<br> Após os 40 minutos, destampe a panela e acrescente o macarrão.<br> Assim que o macarrão estiver cozido, desligue a panela e pode servir.<br> Dica:<br> Não deixe o macarrão muito mole.",
+                ingredientes: [
+                    "1 cebola média picada",
+                    "250 g de carne bovina (de preferência músculo ou costela)",
+                    "1 tomate médio picado",
+                    "2 batatas médias cortadas em cubos",
+                    "2 cenouras médias cortadas em cubos",
+                    "2 mandioquinhas médias cortadas em cubos",
+                    "12 vagens picadas",
+                    "2 xícaras de macarrão (tipo argolinha, conchinha, ave maria ou cabelo de anjo)",
+                    "1 tablete de caldo de carne",
+                    "1 envelope de tempero sazon",
+                    "1 pitada de pimenta-do-reino ou pimenta calabresa",
+                    "1 xícara de salsinha e cebolinha bem picadinhas",
+                    "Sal a gosto",
+                    "Água até um pouco mais de metade da panela de pressão"
+                ]
+            }
+        ];
+
+       
+        function getListaIngredientes(receita) {
+            return `
+                <ul>
+                    ${receita.ingredientes.map(ingrediente => `<li>${ingrediente}</li>`).join("")}
+                </ul>
+            `;
+        }
+
+       
+        function getCard(receita) {
+            return `
+                <div class="card">
+                    <img src="${receita.imagem}" class="card-img-top" alt="${receita.titulo}">
+                    <div class="card-body">
+                        <h5 class="card-title">${receita.titulo}</h5>
+                        <div class="card-text">
+                            <h6>Ingredientes:</h6>
+                            ${getListaIngredientes(receita)}
+                            <hr>
+                            <p>${receita.preparo}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        
+        function preencheCatalogo() {
+            const pnlCatalogo = document.getElementById("pnlCatalogo");
+            const receitasHtml = receitas.map(receita => getCard(receita)).join("");
+            pnlCatalogo.innerHTML = receitasHtml;
+        }
+    </script>
+</body>
+</html>
